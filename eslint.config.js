@@ -13,22 +13,20 @@ export default defineConfig([
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
+      reactDom.configs.recommended,
+      reactHooks.configs["recommended-latest"],
+      reactRefresh.configs.vite,
+      reactX.configs["recommended-typescript"],
       tseslint.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
       tseslint.configs.strictTypeChecked,
       tseslint.configs.stylisticTypeChecked,
-      reactHooks.configs["recommended-latest"],
-      reactX.configs["recommended-typescript"],
-      reactDom.configs.recommended,
-
-
-      reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2025,
       globals: globals.browser,
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ['./tsconfig.node.json', './tsconfig.app.json', './tsconfig.test.json', './tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
