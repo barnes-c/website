@@ -1,7 +1,10 @@
-node_modules
-bun.lockb
-dist
 .git
-.github
-.vscode
+.gitignore
+node_modules
+dist
+Dockerfile
+.docker/*
 *.log
+*.swp
+.vscode
+.idea
