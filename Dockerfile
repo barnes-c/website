@@ -31,4 +31,9 @@ LABEL \
 COPY ./.docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+RUN adduser -D -H -u 1001 -s /sbin/nologin appuser \
+    && mkdir -p /var/cache/nginx /var/run /var/log/nginx \
+    && chown -R 1001:1001 /usr/share/nginx/html /var/cache/nginx /var/run /var/log/nginx /etc/nginx
+
+USER 1001
+EXPOSE 8080
