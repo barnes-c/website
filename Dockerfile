@@ -11,9 +11,9 @@ FROM nginx:1.29-alpine
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
 ARG IMAGE_NAME="website"
-ARG IMAGE_TAG="${VERSION}"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
+ARG IMAGE_TAG="${VERSION}"
 
 LABEL \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
