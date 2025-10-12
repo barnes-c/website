@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "my-website",
+      "name": "website",
       "dependencies": {
         "react": "latest",
         "react-dom": "latest",
