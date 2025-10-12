@@ -1,0 +1,42 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":semanticCommits",
+        ":dependencyDashboard"
+    ],
+    "labels": [
+        "dependencies"
+    ],
+    "rangeStrategy": "bump",
+    "schedule": [
+        "at any time"
+    ],
+    "automerge": false,
+    "assignees": [
+        "barnes-c"
+    ],
+    "reviewers": [
+        "barnes-c"
+    ],
+    "prHourlyLimit": 0,
+    "prConcurrentLimit": 0,
+    "packageRules": [
+        {
+            "matchManagers": [
+                "bun",
+                "npm"
+            ],
+            "matchDepTypes": [
+                "devDependencies"
+            ],
+            "groupName": "dev dependencies"
+        },
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "groupName": "github actions"
+        }
+    ]
+}
