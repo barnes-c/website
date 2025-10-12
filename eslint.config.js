@@ -1,4 +1,3 @@
-// eslint.config.js
 import js from "@eslint/js";
 import reactDom from "eslint-plugin-react-dom";
 import reactHooks from "eslint-plugin-react-hooks";
