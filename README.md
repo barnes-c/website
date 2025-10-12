@@ -1,9 +1,7 @@
 # website
 
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+[![CI](https://github.com/barnes-c/website/actions/workflows/ci.yaml/badge.svg)](https://github.com/barnes-c/website/actions/workflows/ci.yml)
+[![GitHub release](https://img.shields.io/github/v/release/barnes-c/website?display_name=tag)](https://github.com/barnes-c/website/releases/latest)
+[![License](https://img.shields.io/github/license/barnes-c/website)](./LICENSE)
 
 This is my own [website](https://barnes.biz). This is my playground with which I try to keep up with latest Bun/Node/web technologies.
-
-im using angular naming convention for commits..
