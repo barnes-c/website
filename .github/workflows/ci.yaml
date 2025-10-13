@@ -87,13 +87,18 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
     steps:
       - uses: actions/checkout@v5
-
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
 
-      #same-repo PRs only
+      - name: Compute image
+        id: meta
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      # same-repo PRs only
       - name: Login to GHCR
         if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         uses: docker/login-action@v3
@@ -110,8 +115,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
           tags: |
-            ${{ env.IMAGE }}:sha-${{ github.sha }}
-            ${{ env.IMAGE }}:pr-${{ github.event.number }}
+            ${{ steps.meta.outputs.image }}:sha-${{ github.sha }}
+            ${{ steps.meta.outputs.image }}:pr-${{ github.event.number }}
           build-args: |
             BUILD_TIMESTAMP=${{ github.event.pull_request.updated_at }}
             COMMIT_HASH=${{ github.sha }}
