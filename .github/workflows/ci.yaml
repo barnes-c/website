@@ -115,11 +115,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
           tags: |
-            ${{ steps.meta.outputs.image }}:sha-${{ github.sha }}
+            ${{ steps.meta.outputs.image }}:sha-${GITHUB_SHA::7}
             ${{ steps.meta.outputs.image }}:pr-${{ github.event.number }}
           build-args: |
             BUILD_TIMESTAMP=${{ github.event.pull_request.updated_at }}
-            COMMIT_HASH=${{ github.sha }}
+            COMMIT_HASH=${GITHUB_SHA::7}
             VERSION=pr-${{ github.event.number }}
 
   package_release:
