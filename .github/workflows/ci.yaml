@@ -9,6 +9,7 @@ on:
 
 env:
   APP_NAME: website
+  IMAGE: ghcr.io/${{ github.repository }}
 
 jobs:
   lint:
