@@ -107,6 +107,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Short SHA
+        id: vars
+        run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
       # Build always. Push only if login ran.
       - name: Build multi-arch (PR)
         uses: docker/build-push-action@v6
@@ -115,11 +119,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
           tags: |
-            ${{ steps.meta.outputs.image }}:sha-${GITHUB_SHA::7}
+            ${{ steps.meta.outputs.image }}:sha-${{ steps.vars.outputs.short_sha }}
             ${{ steps.meta.outputs.image }}:pr-${{ github.event.number }}
           build-args: |
             BUILD_TIMESTAMP=${{ github.event.pull_request.updated_at }}
-            COMMIT_HASH=${GITHUB_SHA::7}
+            COMMIT_HASH=${{ steps.vars.outputs.short_sha }}
             VERSION=pr-${{ github.event.number }}
 
   package_release:
