@@ -19,7 +19,8 @@ export default function BackgroundMesh() {
     const pageActive = usePageActive();
 
     const running = pageActive && !reduceMotion;
-    const speed = running ? 0.2 : 0;
+    const DEFAULT_SPEED = 0.08;
+    const speed = running ? DEFAULT_SPEED : 0;
 
     const ready = w > 0 && h > 0;
 
