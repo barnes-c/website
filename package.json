@@ -12,6 +12,7 @@
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.test.json --noEmit"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.59",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
