@@ -1,17 +1,7 @@
 import { MeshGradient } from "@paper-design/shaders-react";
-import { useEffect, useState } from "react";
+import { usePageActive } from "../hooks/usePageActive";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { useViewport } from "../hooks/useViewport";
-
-function usePageActive() {
-    const [active, setActive] = useState(!document.hidden);
-    useEffect(() => {
-        const onVis = () => { setActive(!document.hidden) };
-        document.addEventListener("visibilitychange", onVis);
-        return () => { document.removeEventListener("visibilitychange", onVis) };
-    }, []);
-    return active;
-}
 
 export default function BackgroundMesh() {
     const { w, h } = useViewport();
