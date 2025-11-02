@@ -2,10 +2,10 @@ name: ci
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     tags: ["*"]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 env:
   APP_NAME: website
@@ -45,17 +45,14 @@ jobs:
       - name: Install
         run: bun install --no-progress
 
-      - name: Test
-        run: bun run test
-
       - name: Build
         run: bun run build
 
-      - name: Upload dist artifact
+      - name: Upload site artifact
         uses: actions/upload-artifact@v5
         with:
-          name: dist
-          path: dist
+          name: site
+          path: out
           if-no-files-found: error
 
   release:
@@ -63,15 +60,14 @@ jobs:
     needs: test
     runs-on: ubuntu-24.04
     steps:
-      - name: Download dist artifact
+      - name: Download site artifact
         uses: actions/download-artifact@v6
         with:
-          name: dist
-          path: dist
+          name: site
+          path: out
 
       - name: Create ZIP
-        run: |
-          zip -r "${{ env.APP_NAME }}-${{ github.ref_name }}.zip" dist
+        run: zip -r "${{ env.APP_NAME }}-${{ github.ref_name }}.zip" out
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2

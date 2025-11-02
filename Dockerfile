@@ -3,7 +3,7 @@ ARG BUILDPLATFORM
 
 FROM --platform=$BUILDPLATFORM oven/bun:1.3 AS build
 WORKDIR /app
-COPY package.json bun.lock ./
+COPY package.json bun.lock* ./
 ENV NODE_ENV=production
 RUN bun install --frozen-lockfile
 COPY . .
@@ -32,7 +32,7 @@ LABEL \
     org.opencontainers.image.version="${VERSION}"
 
 COPY ./.docker/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/out /usr/share/nginx/html
 
 RUN adduser -D -H -u 1001 -s /sbin/nologin appuser \
     && mkdir -p /var/cache/nginx /var/run /var/log/nginx \
