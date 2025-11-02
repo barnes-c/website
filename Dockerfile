@@ -1,14 +1,13 @@
-ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
-FROM oven/bun:1.3 AS build
+FROM --platform=$BUILDPLATFORM oven/bun:1.3 AS build
 WORKDIR /app
 COPY package.json bun.lock* ./
-ENV NODE_ENV=production
 RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
-FROM --platform=$TARGETPLATFORM nginx:1.29-alpine
+FROM nginx:1.29-alpine
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
@@ -16,6 +15,8 @@ ARG IMAGE_NAME="website"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
 ARG IMAGE_TAG="${VERSION}"
+
+ENV NODE_ENV=production
 
 LABEL \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
