@@ -4,4 +4,4 @@
 [![GitHub tag](https://img.shields.io/github/v/tag/barnes-c/website?label=latest)](https://github.com/barnes-c/website/tags)
 [![License](https://img.shields.io/github/license/barnes-c/website)](./LICENSE)
 
-This is my own [website](https://barnes.biz). This is my playground with which I try to keep up with latest Bun/Node/web technologies.
+This is my own [website](https://barnes.biz). This is my playground with which I try to keep up with latest web technologies.

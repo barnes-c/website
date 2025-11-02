@@ -1,17 +1,9 @@
+"use client";
+import { usePageActive } from "@/hooks/usePageActive";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useViewport } from "@/hooks/useViewport";
 import { MeshGradient } from "@paper-design/shaders-react";
-import { useEffect, useState } from "react";
-import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
-import { useViewport } from "../hooks/useViewport";
 
-function usePageActive() {
-    const [active, setActive] = useState(!document.hidden);
-    useEffect(() => {
-        const onVis = () => { setActive(!document.hidden) };
-        document.addEventListener("visibilitychange", onVis);
-        return () => { document.removeEventListener("visibilitychange", onVis) };
-    }, []);
-    return active;
-}
 
 export default function BackgroundMesh() {
     const { w, h } = useViewport();
@@ -19,16 +11,11 @@ export default function BackgroundMesh() {
     const pageActive = usePageActive();
 
     const running = pageActive && !reduceMotion;
-    const DEFAULT_SPEED = 0.08;
-    const speed = running ? DEFAULT_SPEED : 0;
-
+    const speed = running ? 0.08 : 0;
     const ready = w > 0 && h > 0;
 
     return (
-        <div
-            aria-hidden="true"
-            style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}
-        >
+        <div aria-hidden="true" style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
             {ready && (
                 <MeshGradient
                     width={Math.round(w)}

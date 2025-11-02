@@ -1,15 +1,14 @@
-ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
 FROM --platform=$BUILDPLATFORM oven/bun:1.3 AS build
 WORKDIR /app
 COPY package.json bun.lock ./
-ENV NODE_ENV=production
 RUN bun install --frozen-lockfile
 COPY . .
+ENV NODE_ENV=production
 RUN bun run build
 
-FROM --platform=$TARGETPLATFORM nginx:1.29-alpine
+FROM nginx:1.29-alpine
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
@@ -17,6 +16,8 @@ ARG IMAGE_NAME="website"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
 ARG IMAGE_TAG="${VERSION}"
+
+ENV NODE_ENV=production
 
 LABEL \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
@@ -32,7 +33,7 @@ LABEL \
     org.opencontainers.image.version="${VERSION}"
 
 COPY ./.docker/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/out /usr/share/nginx/html
 
 RUN adduser -D -H -u 1001 -s /sbin/nologin appuser \
     && mkdir -p /var/cache/nginx /var/run /var/log/nginx \
