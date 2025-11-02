@@ -13,14 +13,9 @@
         "at any time"
     ],
     "automerge": false,
-    "assignees": [
-        "barnes-c"
-    ],
-    "reviewers": [
-        "barnes-c"
-    ],
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
+    "pinDigests": true,
     "packageRules": [
         {
             "matchManagers": [
@@ -37,6 +32,14 @@
                 "github-actions"
             ],
             "groupName": "github actions"
+        },
+        {
+            "matchManagers": [
+                "dockerfile"
+            ],
+            "groupName": "docker base images",
+            "separateMajorMinor": false,
+            "separateMinorPatch": false
         }
     ]
 }

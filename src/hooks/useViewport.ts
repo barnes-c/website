@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
+type Size = { w: number; h: number };
+
 export function useViewport() {
-    const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
+    const [size, setSize] = useState<Size>({ w: 0, h: 0 });
 
     useEffect(() => {
-        function onResize() {
-            setSize({ w: window.innerWidth, h: window.innerHeight });
-        }
+        const onResize = () => setSize({ w: window.innerWidth, h: window.innerHeight });
         onResize();
         window.addEventListener("resize", onResize, { passive: true });
-        return () => { window.removeEventListener("resize", onResize) };
+        return () => window.removeEventListener("resize", onResize);
     }, []);
 
     return size;

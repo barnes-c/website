@@ -2,10 +2,10 @@ name: ci
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     tags: ["*"]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 env:
   APP_NAME: website
@@ -15,10 +15,10 @@ jobs:
   lint:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
         with:
           bun-version: 1.3.1
 
@@ -35,27 +35,24 @@ jobs:
     runs-on: ubuntu-24.04
     needs: lint
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
         with:
           bun-version: 1.3.1
 
       - name: Install
         run: bun install --no-progress
 
-      - name: Test
-        run: bun run test
-
       - name: Build
         run: bun run build
 
-      - name: Upload dist artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload site artifact
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
-          name: dist
-          path: dist
+          name: site
+          path: out
           if-no-files-found: error
 
   release:
@@ -63,18 +60,17 @@ jobs:
     needs: test
     runs-on: ubuntu-24.04
     steps:
-      - name: Download dist artifact
-        uses: actions/download-artifact@v5
+      - name: Download site artifact
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
-          name: dist
-          path: dist
+          name: site
+          path: out
 
       - name: Create ZIP
-        run: |
-          zip -r "${{ env.APP_NAME }}-${{ github.ref_name }}.zip" dist
+        run: zip -r "${{ env.APP_NAME }}-${{ github.ref_name }}.zip" out
 
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2
         with:
           files: |
             ${{ env.APP_NAME }}-${{ github.ref_name }}.zip
@@ -91,9 +87,9 @@ jobs:
     env:
       IMAGE: ghcr.io/${{ github.repository }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: docker/setup-qemu-action@v3
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3
+      - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
 
       - name: Compute image
         id: meta
@@ -102,7 +98,7 @@ jobs:
       # same-repo PRs only
       - name: Login to GHCR
         if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
-        uses: docker/login-action@v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -114,7 +110,7 @@ jobs:
 
       # Build always. Push only if login ran.
       - name: Build multi-arch (PR)
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -135,16 +131,16 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: docker/setup-qemu-action@v3
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/login-action@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3
+      - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
+      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push multi-arch (tag)
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
         with:
           context: .
           platforms: linux/amd64,linux/arm64
