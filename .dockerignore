@@ -1,9 +1,11 @@
 .git
 .gitignore
-node_modules
-dist
-Dockerfile
+.idea
+.next
+.vscode
 *.log
 *.swp
-.vscode
-.idea
+dist
+Dockerfile
+node_modules
+out
