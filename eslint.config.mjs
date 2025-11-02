@@ -7,7 +7,7 @@ import tseslint from "typescript-eslint";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
-  { ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "dist/**"] },
+  { ignores: ["node_modules/**", ".next/**", "out/**"] },
 
   js.configs.recommended,
 
@@ -57,14 +57,11 @@ export default [
 
   {
     files: [
-      "**/*.{js,mjs,cjs}",
+      "**/*.js",
       "eslint.config.js",
       "next.config.ts",
       "postcss.config.*",
-      "tailwind.config.*",
-      "tsup.config.*",
-      "vitest.config.*",
-      "bunfig.*"
+      "tailwind.config.*"
     ],
     languageOptions: {
       ecmaVersion: "latest",
