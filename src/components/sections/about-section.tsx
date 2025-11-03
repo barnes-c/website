@@ -2,7 +2,6 @@
 
 import { MagneticButton } from "@/components/magnetic-button"
 import { useReveal } from "@/hooks/use-reveal"
-import Link from "next/link"
 
 export function AboutSection({ scrollToSection }: { scrollToSection?: (index: number) => void }) {
     const { ref, isVisible } = useReveal(0.3)
@@ -21,9 +20,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                                 }`}
                         >
                             <h2 className="mb-3 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-4 md:text-6xl lg:text-7xl">
-                                <Link href="https://github.com/barnes-c" target="_blank" rel="noopener noreferrer">
-                                    Browse my Code
-                                </Link>
+                                Browse my Code
                                 <br />
                                 collaboration and
                                 <br />
