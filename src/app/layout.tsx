@@ -1,26 +1,26 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import type { ReactNode } from "react"
+import "./globals.css"
+
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "my-website",
-  description: "A personal website built with Next.js",
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
+  title: "barnes.biz",
+  description: "Personal website of Christopher Barnes",
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode
 }>) {
   return (
     <html lang="en">
-      <body
-      >
+      <body className={`font-sans antialiased`}>
         {children}
       </body>
     </html>
-  );
+  )
 }
