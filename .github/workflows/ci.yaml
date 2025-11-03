@@ -46,7 +46,7 @@ jobs:
         run: bun install --no-progress
 
       - name: Build
-        run: bun run build
+        run: bun run build --webpack # TODO remove --webpack when bun supports turbopack
 
       - name: Upload site artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
