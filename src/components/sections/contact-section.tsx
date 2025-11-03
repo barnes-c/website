@@ -5,6 +5,11 @@ import { useReveal } from "@/hooks/use-reveal"
 import { Mail, MapPin } from "lucide-react"
 import { useState, type FormEvent } from "react"
 
+const SOCIALS = [
+    { label: "GitHub", href: "https://github.com/barnes-c" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/christopher-barnes-96965218a/" },
+] as const
+
 export function ContactSection() {
     const { ref, isVisible } = useReveal(0.3)
     const [formData, setFormData] = useState({ name: "", email: "", message: "" })
@@ -21,7 +26,7 @@ export function ContactSection() {
 
         setIsSubmitting(true)
 
-        // Simulate form submission (replace with actual API call later)
+        // TODO: Simulate form submission (replace with actual API call later)
         await new Promise((resolve) => setTimeout(resolve, 1500))
 
         setIsSubmitting(false)
@@ -85,13 +90,16 @@ export function ContactSection() {
                                     }`}
                                 style={{ transitionDelay: "500ms" }}
                             >
-                                {["GitHub", "LinkedIn"].map((social, _) => (
+                                {SOCIALS.map(({ label, href }) => (
                                     <a
-                                        key={social}
-                                        href="#"
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        title={label}
                                         className="border-b border-transparent font-mono text-xs text-foreground/60 transition-all hover:border-foreground/60 hover:text-foreground/90"
                                     >
-                                        {social}
+                                        {label}
                                     </a>
                                 ))}
                             </div>
