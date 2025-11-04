@@ -1,5 +1,7 @@
+"use client"
+
 import ProjectCard from "@/components/project-card"
-import { useReveal } from "@/hooks/use-reveal"
+import { useReveal } from "@/hooks/useReveal"
 import { projects } from "@/utils/data/project"
 import { useState } from "react"
 

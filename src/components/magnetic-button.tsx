@@ -38,7 +38,6 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
         const rafRef = useRef<number | null>(null)
         const positionRef = useRef({ x: 0, y: 0 })
 
-        // merge refs
         useEffect(() => {
             if (!forwardedRef) return
             if (typeof forwardedRef === "function") {
@@ -48,7 +47,6 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
             }
         }, [forwardedRef])
 
-        // cleanup RAF on unmount
         useEffect(() => {
             return () => {
                 if (rafRef.current) cancelAnimationFrame(rafRef.current)
@@ -104,7 +102,7 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
 
         return (
             <button
-                {...props} // includes type, disabled, onClick, etc.
+                {...props}
                 ref={localRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}

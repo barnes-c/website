@@ -1,7 +1,7 @@
 "use client"
 
 import { MagneticButton } from "@/components/magnetic-button"
-import { useReveal } from "@/hooks/use-reveal"
+import { useReveal } from "@/hooks/useReveal"
 
 export function AboutSection() {
     const { ref, isVisible } = useReveal(0.3)

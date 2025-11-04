@@ -1,6 +1,6 @@
 "use client"
 
-import Collapsible from "@/components/collapsible-card"
+import CollapsibleCard from "@/components/collapsible-card"
 import type { Project } from "@/utils/types/project"
 
 export default function ProjectCard({
@@ -76,7 +76,7 @@ export default function ProjectCard({
                 </div>
             </button>
 
-            <Collapsible isOpen={open} id={panelId}>
+            <CollapsibleCard isOpen={open} id={panelId}>
                 <ul className="space-y-2 pl-14 pr-2 md:pl:[5.5rem] md:pl-[5.5rem]">
                     {project.description.map((line, i) => (
                         <li
@@ -88,7 +88,7 @@ export default function ProjectCard({
                         </li>
                     ))}
                 </ul>
-            </Collapsible>
+            </CollapsibleCard>
         </div>
     )
 }
