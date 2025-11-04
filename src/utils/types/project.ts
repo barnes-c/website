@@ -8,7 +8,6 @@ export type Project = {
     description: string[]
 }
 
-
 export const projects: Project[] = [
     {
         number: "01",

@@ -18,6 +18,7 @@ export default function Collapsible({
     useLayoutEffect(() => {
         const el = contentRef.current
         if (!el) return
+        // eslint-disable-next-line
         setMaxHeight(isOpen ? el.scrollHeight : 0)
     }, [isOpen, children])
 
