@@ -102,7 +102,6 @@ export function ContactSection() {
                         </div>
                     </div>
 
-                    {/* Right side - Minimal form */}
                     <div className="flex flex-col justify-center">
                         <form
                             onSubmit={handleSubmit}

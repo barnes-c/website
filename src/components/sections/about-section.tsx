@@ -13,7 +13,6 @@ export function AboutSection() {
         >
             <div className="mx-auto w-full max-w-7xl">
                 <div className="grid gap-8 md:grid-cols-2 md:gap-16 lg:gap-24">
-                    {/* Left side - Story */}
                     <div>
                         <div
                             className={`mb-6 transition-all duration-700 md:mb-12 ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-12 opacity-0"
@@ -42,7 +41,6 @@ export function AboutSection() {
                         </div>
                     </div>
 
-                    {/* Right side - Stats with creative layout */}
                     <div className="flex flex-col justify-center space-y-6 md:space-y-12">
                         {[
                             { value: "10+", label: "Open-Source projects", sublabel: "contributed to", direction: "right" },
