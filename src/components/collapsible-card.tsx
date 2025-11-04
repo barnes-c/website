@@ -1,46 +1,46 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import type { ReactNode } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 
 export default function Collapsible({
     isOpen,
-    children,
     id,
+    children,
 }: {
     isOpen: boolean
-    children: React.ReactNode
     id: string
+    children: ReactNode
 }) {
-    const ref = useRef<HTMLDivElement | null>(null)
-    const [height, setHeight] = useState(0)
+    const contentRef = useRef<HTMLDivElement | null>(null)
+    const [maxHeight, setMaxHeight] = useState<number>(0)
 
-    useEffect(() => {
-        const el = ref.current
+    useLayoutEffect(() => {
+        const el = contentRef.current
         if (!el) return
-        // Measure content height
-        const next = isOpen ? el.scrollHeight : 0
-        setHeight(next)
+        setMaxHeight(isOpen ? el.scrollHeight : 0)
     }, [isOpen, children])
 
-    // Re-measure on window resize for responsive content
-    useEffect(() => {
-        const handler = () => {
-            if (!ref.current) return
-            setHeight(isOpen ? ref.current.scrollHeight : 0)
+    useLayoutEffect(() => {
+        const onResize = () => {
+            const el = contentRef.current
+            if (!el) return
+            if (isOpen) setMaxHeight(el.scrollHeight)
         }
-        window.addEventListener("resize", handler)
-        return () => window.removeEventListener("resize", handler)
+        window.addEventListener("resize", onResize)
+        return () => window.removeEventListener("resize", onResize)
     }, [isOpen])
 
     return (
         <div
             id={id}
-            ref={ref}
-            style={{ height }}
-            className="overflow-hidden transition-[height] duration-300 ease-in-out"
+            style={{ maxHeight, opacity: isOpen ? 1 : 0 }}
+            className="overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out"
             aria-hidden={!isOpen}
         >
-            <div className="pt-4 pb-2">{children}</div>
+            <div ref={contentRef} className="pt-4 pb-2">
+                {children}
+            </div>
         </div>
     )
 }
