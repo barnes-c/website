@@ -1,7 +1,7 @@
 "use client"
 
 import { MagneticButton } from "@/components/magnetic-button"
-import { useReveal } from "@/hooks/use-reveal"
+import { useReveal } from "@/hooks/useReveal"
 import { Mail, MapPin } from "lucide-react"
 import { useState, type FormEvent } from "react"
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useReveal } from "@/hooks/use-reveal"
+import { useReveal } from "@/hooks/useReveal"
 import { skills } from "@/utils/data/skill"
 import SkillsCard from "../skills-card"
 
