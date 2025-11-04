@@ -27,30 +27,6 @@ export default function robots(): MetadataRoute.Robots {
             },
             // block AI and scrapers
             {
-                userAgent: 'GPTBot',
-                disallow: '/',
-            },
-            {
-                userAgent: 'CCBot',
-                disallow: '/',
-            },
-            {
-                userAgent: 'ChatGPT-User',
-                disallow: '/',
-            },
-            {
-                userAgent: 'Anthropic-AI',
-                disallow: '/',
-            },
-            {
-                userAgent: 'FacebookBot',
-                disallow: '/',
-            },
-            {
-                userAgent: 'Twitterbot',
-                disallow: '/',
-            },
-            {
                 userAgent: '*',
                 disallow: '/',
             },
