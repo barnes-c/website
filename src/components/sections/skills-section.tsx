@@ -25,7 +25,7 @@ export function SkillsSection() {
                     {[
                         {
                             title: "Cloud Infrastructure",
-                            description: "Certified Kubernetes Administrator (CKA & CKAD): Operating and scaling cloud infrastructure with OpenStack and Kubernetes",
+                            description: "Certified Kubernetes Administrator (CKA) and Developer (CKAD): Operating and scaling cloud infrastructure with OpenStack and Kubernetes",
                             direction: "top",
                         },
                         {
