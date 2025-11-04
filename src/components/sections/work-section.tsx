@@ -5,7 +5,7 @@ import { useState } from "react"
 
 export function WorkSection() {
     const { ref, isVisible } = useReveal(0.3)
-    const [activeId, setActiveId] = useState<number | null>(null)
+    const [activeId, setActiveId] = useState<string | null>(null)
 
     return (
         <section
