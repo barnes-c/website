@@ -7,8 +7,24 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "barnes.biz",
-  description: "Personal website of Christopher Barnes",
+  metadataBase: new URL("https://barnes.biz"),
+  title: "Christopher Barnes | Cloud Systems Engineer",
+  description: "Cloud Systems Engineer: I design, automate, and operate infrastructure with Kubernetes, Terraform, and a heavy dose of curiosity.",
+  openGraph: {
+    title: "Christopher Barnes | Cloud Systems Engineer",
+    description: "Cloud Systems Engineer: I design, automate, and operate infrastructure with Kubernetes, Terraform, and a heavy dose of curiosity.",
+    url: "https://barnes.biz",
+    siteName: "barnes.biz",
+    locale: "en_US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://barnes.biz",
+  },
 }
 
 export default function RootLayout({
