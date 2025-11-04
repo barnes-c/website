@@ -18,7 +18,7 @@ export function WorkSection() {
                     <h2 className="mb-2 font-sans text-5xl font-light tracking-tight text-foreground md:text-6xl lg:text-7xl">
                         Featured
                     </h2>
-                    <p className="font-mono text-sm text-foreground/60 md:text-base">/ Recent explorations</p>
+                    <p className="font-mono text-sm text-foreground/60 md:text-base">/ Recent expirences</p>
                 </div>
 
                 <div className="space-y-6 md:space-y-8">
