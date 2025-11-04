@@ -1,7 +1,7 @@
 "use client"
 
 import Collapsible from "@/components/collapsible-card"
-import type { Project } from "@/utils/project"
+import type { Project } from "@/utils/types/project"
 import { useState } from "react"
 
 export default function ProjectCard({

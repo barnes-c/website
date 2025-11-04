@@ -1,6 +1,6 @@
 import ProjectCard from "@/components/project-card"
 import { useReveal } from "@/hooks/use-reveal"
-import { projects } from "@/utils/project"
+import { projects } from "@/utils/types/project"
 
 export function WorkSection() {
     const { ref, isVisible } = useReveal(0.3)
