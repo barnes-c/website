@@ -4,21 +4,20 @@
 import { BackgroundShader } from "@/components/background-shader"
 import { CustomCursor } from "@/components/custom-cursor"
 import { GrainOverlay } from "@/components/grain-overlay"
-import { SectionsScroller, useSectionsControls } from "@/components/sections-scroller"
+import SectionsScroller, { SectionsScrollerHandle } from "@/components/sections-scroller"
 import { AboutSection } from "@/components/sections/about-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { SkillsSection } from "@/components/sections/skills-section"
 import { WorkSection } from "@/components/sections/work-section"
 import { TopNav } from "@/components/top-nav"
-import { useState } from "react"
+import React from "react"
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState(0)
+  const [currentSection, setCurrentSection] = React.useState(0)
+  const scrollerRef = React.useRef<SectionsScrollerHandle>(null)
 
-  // consume controls from context inside the tree
-  const Nav = () => {
-    const { scrollToSection } = useSectionsControls()
-    return <TopNav currentSection={currentSection} onNavigate={scrollToSection} loaded />
+  const handleNavigate = (i: number) => {
+    scrollerRef.current?.scrollToSection(i)
   }
 
   return (
@@ -27,10 +26,10 @@ export default function Home() {
       <GrainOverlay />
       <BackgroundShader />
 
-      <SectionsScroller onSectionChange={setCurrentSection}>
-        {/* Top nav needs to live inside so it can access controls via context */}
-        <Nav />
+      {/* Nav is OUTSIDE the scroller so it always follows the viewport */}
+      <TopNav currentSection={currentSection} onNavigate={handleNavigate} loaded />
 
+      <SectionsScroller ref={scrollerRef} onSectionChange={setCurrentSection}>
         {/* Hero */}
         <section className="flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
           <div className="max-w-3xl">

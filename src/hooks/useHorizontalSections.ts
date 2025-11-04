@@ -1,4 +1,3 @@
-// hooks/useHorizontalSections.ts
 import { useCallback, useEffect, useRef, useState } from "react"
 
 type Options = {
@@ -12,7 +11,6 @@ export function useHorizontalSections(
     const { sectionCount } = opts
     const [currentSection, setCurrentSection] = useState(0)
 
-    // touch and throttle state
     const touchStartY = useRef(0)
     const touchStartX = useRef(0)
     const scrollThrottleRef = useRef<number | undefined>(undefined)
@@ -29,7 +27,6 @@ export function useHorizontalSections(
         [containerRef, sectionCount]
     )
 
-    // touch
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
@@ -71,7 +68,6 @@ export function useHorizontalSections(
         }
     }, [containerRef, currentSection, scrollToSection, sectionCount])
 
-    // wheel
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
@@ -90,7 +86,6 @@ export function useHorizontalSections(
         return () => container.removeEventListener("wheel", handleWheel)
     }, [containerRef, currentSection])
 
-    // scroll listener with rAF throttle
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
