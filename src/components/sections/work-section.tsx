@@ -1,9 +1,11 @@
 import ProjectCard from "@/components/project-card"
 import { useReveal } from "@/hooks/use-reveal"
 import { projects } from "@/utils/types/project"
+import { useState } from "react"
 
 export function WorkSection() {
     const { ref, isVisible } = useReveal(0.3)
+    const [activeId, setActiveId] = useState<number | null>(null)
 
     return (
         <section
@@ -12,24 +14,32 @@ export function WorkSection() {
         >
             <div className="mx-auto w-full max-w-7xl">
                 <div
-                    className={`mb-12 transition-all duration-700 md:mb-16 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
-                        }`}
+                    className={`mb-12 transition-all duration-700 md:mb-16 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"}`}
                 >
                     <h2 className="mb-2 font-sans text-5xl font-light tracking-tight text-foreground md:text-6xl lg:text-7xl">
                         Featured
                     </h2>
-                    <p className="font-mono text-sm text-foreground/60 md:text-base">/ Recent expirences</p>
+                    <p className="font-mono text-sm text-foreground/60 md:text-base">
+                        / Recent experiences
+                    </p>
                 </div>
 
                 <div className="space-y-6 md:space-y-8">
-                    {projects.map((project, i) => (
-                        <ProjectCard
-                            key={project.number}
-                            project={project}
-                            index={i}
-                            isVisible={isVisible}
-                        />
-                    ))}
+                    {projects.map((project, i) => {
+                        const isOpen = activeId === project.number
+                        return (
+                            <ProjectCard
+                                key={project.number}
+                                project={project}
+                                index={i}
+                                isVisible={isVisible}
+                                open={isOpen}
+                                onToggle={() =>
+                                    setActiveId((prev) => (prev === project.number ? null : project.number))
+                                }
+                            />
+                        )
+                    })}
                 </div>
             </div>
         </section>
