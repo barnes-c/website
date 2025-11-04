@@ -3,7 +3,7 @@
 import { MagneticButton } from "@/components/magnetic-button"
 import { useReveal } from "@/hooks/use-reveal"
 
-export function AboutSection({ scrollToSection }: { scrollToSection?: (index: number) => void }) {
+export function AboutSection() {
     const { ref, isVisible } = useReveal(0.3)
 
     return (
@@ -20,7 +20,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                                 }`}
                         >
                             <h2 className="mb-3 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-4 md:text-6xl lg:text-7xl">
-                                Browse my Code
+                                Building through
                                 <br />
                                 collaboration and
                                 <br />
@@ -82,13 +82,10 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                         }`}
                     style={{ transitionDelay: "750ms" }}
                 >
-                    <MagneticButton size="lg" variant="primary" onClick={() => scrollToSection?.(4)}>
+                    <MagneticButton size="lg" variant="primary">
                         <a href="https://github.com/barnes-c" target="_blank" rel="noopener noreferrer">
                             Browse my Code
                         </a>
-                    </MagneticButton>
-                    <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection?.(1)}>
-                        View my Work
                     </MagneticButton>
                 </div>
             </div>

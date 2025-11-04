@@ -168,7 +168,7 @@ export function ContactSection() {
                                     className="w-full disabled:opacity-50"
                                     onClick={isSubmitting ? undefined : undefined}
                                 >
-                                    {isSubmitting ? "Sending..." : "Send Message"}
+                                    {isSubmitting ? "Sending..." : "Send Message (Not working yet WIP)"}
                                 </MagneticButton>
                                 {submitSuccess && (
                                     <p className="mt-3 text-center font-mono text-sm text-foreground/80">Message sent successfully!</p>
