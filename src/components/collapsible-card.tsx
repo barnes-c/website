@@ -3,7 +3,7 @@
 import type { ReactNode } from "react"
 import { useLayoutEffect, useRef, useState } from "react"
 
-export default function Collapsible({
+export default function CollapsibleCard({
     isOpen,
     id,
     children,

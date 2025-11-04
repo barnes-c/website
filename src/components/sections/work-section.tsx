@@ -1,3 +1,5 @@
+"use client"
+
 import ProjectCard from "@/components/project-card"
 import { useReveal } from "@/hooks/use-reveal"
 import { projects } from "@/utils/data/project"
