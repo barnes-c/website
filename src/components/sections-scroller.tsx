@@ -1,7 +1,7 @@
 "use client"
 
 import { useHorizontalSections } from "@/hooks/useHorizontalSections"
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from "react"
+import { type ReactNode, Children, forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from "react"
 
 export type SectionsScrollerHandle = {
     scrollToSection: (index: number) => void
@@ -9,7 +9,7 @@ export type SectionsScrollerHandle = {
 }
 
 type Props = {
-    children: React.ReactNode
+    children: ReactNode
     onSectionChange?: (index: number) => void
 }
 
@@ -18,11 +18,11 @@ const SectionsScroller = forwardRef<SectionsScrollerHandle, Props>(function Sect
     ref
 ) {
     const containerRef = useRef<HTMLDivElement>(null)
-    const sectionCount = useMemo(() => React.Children.count(children), [children])
+    const sectionCount = useMemo(() => Children.count(children), [children])
 
     const { currentSection, scrollToSection } = useHorizontalSections(containerRef, { sectionCount })
 
-    React.useEffect(() => {
+    useEffect(() => {
         onSectionChange?.(currentSection)
     }, [currentSection, onSectionChange])
 
