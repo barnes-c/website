@@ -260,14 +260,14 @@ export default function Home() {
           <div className="max-w-3xl">
             <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-sans text-6xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 md:text-7xl lg:text-8xl">
               <span className="text-balance">
-                Welcome to my
+                Christopher
                 <br />
-                cloud systems portfolio
+                Barnes
               </span>
             </h1>
             <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-lg leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-xl">
               <span className="text-pretty">
-                Cloud Systems Engineer. I design, automate, and operate infrastructure with Kubernetes, Terraform, and a heavy dose of curiosity.
+                Cloud Systems Engineer: I design, automate, and operate infrastructure with Kubernetes, Terraform, and a heavy dose of curiosity.
               </span>
             </p>
           </div>
@@ -284,7 +284,7 @@ export default function Home() {
 
         <WorkSection />
         <SkillsSection />
-        <AboutSection scrollToSection={scrollToSection} />
+        <AboutSection />
         <ContactSection />
       </div>
 
