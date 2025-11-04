@@ -25,7 +25,7 @@ export function WorkSection() {
                     {[
                         {
                             number: "01",
-                            title: "CERN",
+                            title: "CERN – European Organization for Nuclear Research",
                             technologies: "Terraform, Docker, OpenStack, Go, Puppet, Linux, GitLab CI/CD, Helm, Kubernetes",
                             category: "Cloud Systems Engineer",
                             year: "2025",
