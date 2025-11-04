@@ -2,22 +2,25 @@
 
 import Collapsible from "@/components/collapsible-card"
 import type { Project } from "@/utils/types/project"
-import { useState } from "react"
 
 export default function ProjectCard({
     project,
     index,
     isVisible,
+    open,
+    onToggle,
 }: {
     project: Project
     index: number
     isVisible: boolean
+    open: boolean
+    onToggle: () => void
 }) {
-    const [open, setOpen] = useState(false)
-
     const getRevealClass = () => {
         if (!isVisible) {
-            return project.direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
+            return project.direction === "left"
+                ? "-translate-x-16 opacity-0"
+                : "translate-x-16 opacity-0"
         }
         return "translate-x-0 opacity-100"
     }
@@ -33,10 +36,9 @@ export default function ProjectCard({
                 maxWidth: index % 2 === 0 ? "85%" : "90%",
             }}
         >
-            {/* Clickable header */}
             <button
                 type="button"
-                onClick={() => setOpen((v) => !v)}
+                onClick={onToggle}
                 className="group flex w-full items-center justify-between py-4 focus:outline-none"
                 aria-expanded={open}
                 aria-controls={panelId}
@@ -64,8 +66,7 @@ export default function ProjectCard({
                     </span>
                     {/* Inline SVG chevron */}
                     <svg
-                        className={`h-5 w-5 flex-none transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"
-                            }`}
+                        className={`h-5 w-5 flex-none transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         aria-hidden="true"
@@ -75,9 +76,8 @@ export default function ProjectCard({
                 </div>
             </button>
 
-            {/* Collapsible content */}
             <Collapsible isOpen={open} id={panelId}>
-                <ul className="space-y-2 pl-14 pr-2 md:pl-[5.5rem]">
+                <ul className="space-y-2 pl-14 pr-2 md:pl:[5.5rem] md:pl-[5.5rem]">
                     {project.description.map((line, i) => (
                         <li
                             key={i}
