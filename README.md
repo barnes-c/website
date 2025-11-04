@@ -9,11 +9,11 @@ It serves as an online CV and a technical sandbox for experimenting with modern 
 
 ## Tech Stack
 
-Framework: [Next.js](https://nextjs.org/) 16 with TypeScript
-UI Library: [React](https://react.dev/) 19
-Styling: [Tailwind CSS](https://tailwindcss.com/) 4 with tw-animate-css
-Visual Effects: [shaders](https://www.npmjs.com/package/shaders)
-Linting & Type Checking: ESLint and TypeScript
+- Framework: [Next.js](https://nextjs.org/) 16 with TypeScript
+- UI Library: [React](https://react.dev/) 19
+- Styling: [Tailwind CSS](https://tailwindcss.com/) 4 with tw-animate-css
+- Visual Effects: [shaders](https://www.npmjs.com/package/shaders)
+- Linting & Type Checking: ESLint and TypeScript
 
 ## Purpose
 
