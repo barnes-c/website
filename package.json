@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.553.0",
-    "next": "16.0.2",
+    "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "shaders": "^2.1.10"
