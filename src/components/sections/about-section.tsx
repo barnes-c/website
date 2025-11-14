@@ -1,10 +1,9 @@
 "use client"
 
 import { MagneticButton } from "@/components/magnetic-button"
-import { useReveal } from "@/hooks/use-reveal"
-import Link from "next/link"
+import { useReveal } from "@/hooks/useReveal"
 
-export function AboutSection({ scrollToSection }: { scrollToSection?: (index: number) => void }) {
+export function AboutSection() {
     const { ref, isVisible } = useReveal(0.3)
 
     return (
@@ -14,16 +13,13 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
         >
             <div className="mx-auto w-full max-w-7xl">
                 <div className="grid gap-8 md:grid-cols-2 md:gap-16 lg:gap-24">
-                    {/* Left side - Story */}
                     <div>
                         <div
                             className={`mb-6 transition-all duration-700 md:mb-12 ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-12 opacity-0"
                                 }`}
                         >
                             <h2 className="mb-3 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-4 md:text-6xl lg:text-7xl">
-                                <Link href="https://github.com/barnes-c" target="_blank" rel="noopener noreferrer">
-                                    Browse my Code
-                                </Link>
+                                Building through
                                 <br />
                                 collaboration and
                                 <br />
@@ -45,7 +41,6 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                         </div>
                     </div>
 
-                    {/* Right side - Stats with creative layout */}
                     <div className="flex flex-col justify-center space-y-6 md:space-y-12">
                         {[
                             { value: "10+", label: "Open-Source projects", sublabel: "contributed to", direction: "right" },
@@ -85,13 +80,10 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                         }`}
                     style={{ transitionDelay: "750ms" }}
                 >
-                    <MagneticButton size="lg" variant="primary" onClick={() => scrollToSection?.(4)}>
+                    <MagneticButton size="lg" variant="primary">
                         <a href="https://github.com/barnes-c" target="_blank" rel="noopener noreferrer">
                             Browse my Code
                         </a>
-                    </MagneticButton>
-                    <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection?.(1)}>
-                        View my Work
                     </MagneticButton>
                 </div>
             </div>

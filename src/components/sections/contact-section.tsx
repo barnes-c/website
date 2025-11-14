@@ -1,7 +1,7 @@
 "use client"
 
 import { MagneticButton } from "@/components/magnetic-button"
-import { useReveal } from "@/hooks/use-reveal"
+import { useReveal } from "@/hooks/useReveal"
 import { Mail, MapPin } from "lucide-react"
 import { useState, type FormEvent } from "react"
 
@@ -46,8 +46,7 @@ export function ContactSection() {
                 <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:gap-16 lg:gap-24">
                     <div className="flex flex-col justify-center">
                         <div
-                            className={`mb-6 transition-all duration-700 md:mb-12 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
-                                }`}
+                            className={`mb-6 transition-all duration-700 md:mb-12 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"}`}
                         >
                             <h2 className="mb-2 font-sans text-4xl font-light leading-[1.05] tracking-tight text-foreground md:mb-3 md:text-7xl lg:text-8xl">
                                 {"Let's"}
@@ -60,8 +59,7 @@ export function ContactSection() {
                         <div className="space-y-4 md:space-y-8">
                             <a
                                 href="mailto:contact@barnes.biz"
-                                className={`group block transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
-                                    }`}
+                                className={`group block transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}
                                 style={{ transitionDelay: "200ms" }}
                             >
                                 <div className="mb-1 flex items-center gap-2">
@@ -74,8 +72,7 @@ export function ContactSection() {
                             </a>
 
                             <div
-                                className={`transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-                                    }`}
+                                className={`transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
                                 style={{ transitionDelay: "350ms" }}
                             >
                                 <div className="mb-1 flex items-center gap-2">
@@ -86,8 +83,7 @@ export function ContactSection() {
                             </div>
 
                             <div
-                                className={`flex gap-2 pt-2 transition-all duration-700 md:pt-4 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
-                                    }`}
+                                className={`flex gap-2 pt-2 transition-all duration-700 md:pt-4 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"}`}
                                 style={{ transitionDelay: "500ms" }}
                             >
                                 {SOCIALS.map(({ label, href }) => (
@@ -106,72 +102,105 @@ export function ContactSection() {
                         </div>
                     </div>
 
-                    {/* Right side - Minimal form */}
                     <div className="flex flex-col justify-center">
-                        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="space-y-4 md:space-y-6"
+                            autoComplete="on"
+                        >
                             <div
-                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                                    }`}
+                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}
                                 style={{ transitionDelay: "200ms" }}
                             >
-                                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Name</label>
+                                <label
+                                    htmlFor="contact-name"
+                                    className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2"
+                                >
+                                    Name
+                                </label>
                                 <input
+                                    id="contact-name"
+                                    name="name"
                                     type="text"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     required
+                                    autoComplete="name"
+                                    inputMode="text"
+                                    enterKeyHint="next"
                                     className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
                                     placeholder="Your name"
                                 />
                             </div>
 
                             <div
-                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                                    }`}
+                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}
                                 style={{ transitionDelay: "350ms" }}
                             >
-                                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email</label>
+                                <label
+                                    htmlFor="contact-email"
+                                    className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2"
+                                >
+                                    Email
+                                </label>
                                 <input
+                                    id="contact-email"
+                                    name="email"
                                     type="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     required
+                                    autoComplete="email"
+                                    inputMode="email"
+                                    enterKeyHint="next"
                                     className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
                                     placeholder="your@email.com"
                                 />
                             </div>
 
                             <div
-                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                                    }`}
+                                className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}
                                 style={{ transitionDelay: "500ms" }}
                             >
-                                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Message</label>
+                                <label
+                                    htmlFor="contact-message"
+                                    className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2"
+                                >
+                                    Message
+                                </label>
                                 <textarea
+                                    id="contact-message"
+                                    name="message"
                                     rows={3}
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                     required
+                                    autoComplete="off"
+                                    enterKeyHint="send"
                                     className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
                                     placeholder="I have this offer for you..."
                                 />
                             </div>
 
                             <div
-                                className={`transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-                                    }`}
+                                className={`transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
                                 style={{ transitionDelay: "650ms" }}
                             >
                                 <MagneticButton
+                                    type="submit"
                                     variant="primary"
                                     size="lg"
                                     className="w-full disabled:opacity-50"
-                                    onClick={isSubmitting ? undefined : undefined}
+                                    disabled={isSubmitting}
+                                    aria-busy={isSubmitting}
                                 >
                                     {isSubmitting ? "Sending..." : "Send Message"}
                                 </MagneticButton>
+
                                 {submitSuccess && (
-                                    <p className="mt-3 text-center font-mono text-sm text-foreground/80">Message sent successfully!</p>
+                                    <p className="mt-3 text-center font-mono text-sm text-foreground/80">
+                                        Message sent successfully!
+                                    </p>
                                 )}
                             </div>
                         </form>

@@ -1,6 +1,6 @@
 ARG BUILDPLATFORM
 
-FROM --platform=$BUILDPLATFORM oven/bun:1.3@sha256:9c5d3c92b234b4708198577d2f39aab7397a242a40da7c2f059e51b9dc62b408 AS build
+FROM --platform=$BUILDPLATFORM oven/bun:1.3@sha256:30b6593d5646d1d695ed0c68c76ed370de538f5f49c34ed565386fd455bf6194 AS build
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
