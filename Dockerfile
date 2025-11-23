@@ -22,7 +22,7 @@ ENV NODE_ENV=production
 LABEL \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
     org.opencontainers.image.description="Website for https://barnes.biz" \
-    org.opencontainers.image.documentation="https://barnes.biz" \
+    org.opencontainers.image.documentation="https://github.com/barnes-c/website/blob/master/README.md" \
     org.opencontainers.image.licenses="GPL-3.0-only" \
     org.opencontainers.image.ref.name="${IMAGE_NAME}" \
     org.opencontainers.image.revision="${COMMIT_HASH}" \
