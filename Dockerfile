@@ -8,7 +8,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM nginx:1.29-alpine@sha256:b3c656d55d7ad751196f21b7fd2e8d4da9cb430e32f646adcf92441b72f82b14
+FROM nginx:1.29-alpine@sha256:289decab414250121a93c3f1b8316b9c69906de3a4993757c424cb964169ad42
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
