@@ -15,7 +15,7 @@
     "next": "16.0.10",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "shaders": "^2.2.21"
+    "shaders": "^2.2.24"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
