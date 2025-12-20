@@ -1,6 +1,6 @@
 ARG BUILDPLATFORM
 
-FROM --platform=$BUILDPLATFORM oven/bun:1.3@sha256:7608db4aeb44f1fe8169cc8ec7055376b3013557b106407ccf092b00e426407d AS build
+FROM --platform=$BUILDPLATFORM oven/bun:1.3@sha256:e90cdbaf9ccdb3d4bd693aa335c3310a6004286a880f62f79b18f9b1312a8ec3 AS build
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
@@ -8,7 +8,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM nginx:1.29-alpine@sha256:052b75ab72f690f33debaa51c7e08d9b969a0447a133eb2b99cc905d9188cb2b
+FROM nginx:1.29-alpine@sha256:8491795299c8e739b7fcc6285d531d9812ce2666e07bd3dd8db00020ad132295
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
