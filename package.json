@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^25.0.9",
+    "@types/node": "^25.0.10",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
-    "baseline-browser-mapping": "^2.9.16",
+    "baseline-browser-mapping": "^2.9.17",
     "depcheck": "^1.4.7",
     "eslint": "^9.39.2",
     "eslint-config-next": "16.1.4",
