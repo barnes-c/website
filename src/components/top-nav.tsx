@@ -46,7 +46,7 @@ export function TopNav({
                 ))}
             </div>
 
-            <MagneticButton variant="secondary" onClick={() => onNavigate(items.length - 1)}>
+            <MagneticButton variant="secondary" onClick={() => { window.location.href = '/dashboard'; }}>
                 Login
             </MagneticButton>
         </nav>
