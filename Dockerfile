@@ -8,7 +8,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM node:24-alpine
+FROM node:25-alpine
 
 RUN apk upgrade --no-cache
 
