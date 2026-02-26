@@ -8,7 +8,10 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM nginx:1.29-alpine@sha256:1d13701a5f9f3fb01aaa88cef2344d65b6b5bf6b7d9fa4cf0dca557a8d7702ba
+ARG NODE_IMAGE_DIGEST=sha256:e4bf2a82ad0a4037d28035ae71529873c069b13eb0455466ae0bc13363826e34
+FROM node:22-alpine@${NODE_IMAGE_DIGEST}
+
+RUN apk upgrade --no-cache
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
@@ -18,8 +21,13 @@ ARG VERSION="dev"
 ARG IMAGE_TAG="${VERSION}"
 
 ENV NODE_ENV=production
+ENV PORT=8080
+ENV HOSTNAME=0.0.0.0
 
 LABEL \
+    org.opencontainers.image.authors="https://github.com/barnes-c" \
+    org.opencontainers.image.base.name="node:22-alpine" \
+    org.opencontainers.image.base.digest="${NODE_IMAGE_DIGEST}" \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
     org.opencontainers.image.description="Website for https://barnes.biz" \
     org.opencontainers.image.documentation="https://barnes.biz" \
@@ -32,12 +40,15 @@ LABEL \
     org.opencontainers.image.vendor="Barnes-C" \
     org.opencontainers.image.version="${VERSION}"
 
-COPY ./.docker/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/out /usr/share/nginx/html
+WORKDIR /app
+
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
 
 RUN adduser -D -H -u 1001 -s /sbin/nologin appuser \
-    && mkdir -p /var/cache/nginx /var/run \
-    && chown -R 1001:1001 /usr/share/nginx/html /var/cache/nginx /var/run /etc/nginx
+    && chown -R 1001:1001 /app
 
 USER 1001
 EXPOSE 8080
+
+CMD ["node", "server.js"]

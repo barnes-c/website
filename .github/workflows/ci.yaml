@@ -48,35 +48,6 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Upload site artifact
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
-        with:
-          name: site
-          path: out
-          if-no-files-found: error
-
-  release:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: build
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Download site artifact
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          name: site
-          path: out
-
-      - name: Create ZIP
-        run: zip -r "${{ env.APP_NAME }}-${{ github.ref_name }}.zip" out
-
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
-        with:
-          files: |
-            ${{ env.APP_NAME }}-${{ github.ref_name }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   package_pr:
     if: github.event_name == 'pull_request'
     needs: build

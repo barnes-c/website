@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: false,
-  output: "export"
+  output: "standalone",
+  async rewrites() {
+    return [
+      {
+        source: "/outpost.goauthentik.io/:path*",
+        destination:
+          "http://authentik-server.authentik.svc.cluster.local/outpost.goauthentik.io/:path*",
+      },
+    ]
+  },
 };
 
 export default nextConfig;
