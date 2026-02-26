@@ -17,9 +17,9 @@ ARG COMMIT_HASH="n/a"
 ARG IMAGE_NAME="website"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
+ENV HOSTNAME=0.0.0.0
 ENV NODE_ENV=production
 ENV PORT=8080
-ENV HOSTNAME=0.0.0.0
 
 LABEL \
     org.opencontainers.image.authors="https://${IMAGE_URL_BASE}" \
