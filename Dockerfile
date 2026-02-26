@@ -8,8 +8,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-ARG NODE_IMAGE_DIGEST=sha256:e4bf2a82ad0a4037d28035ae71529873c069b13eb0455466ae0bc13363826e34
-FROM node:22-alpine@${NODE_IMAGE_DIGEST}
+FROM node:24-alpine
 
 RUN apk upgrade --no-cache
 
