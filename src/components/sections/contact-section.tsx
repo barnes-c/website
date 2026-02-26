@@ -26,14 +26,19 @@ export function ContactSection() {
 
         setIsSubmitting(true)
 
-        // TODO: Simulate form submission (replace with actual API call later)
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        })
 
         setIsSubmitting(false)
+
+        if (!res.ok) return
+
         setSubmitSuccess(true)
         setFormData({ name: "", email: "", message: "" })
 
-        // Reset success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000)
     }
 
