@@ -18,24 +18,20 @@ ARG COMMIT_HASH="n/a"
 ARG IMAGE_NAME="website"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
-ARG IMAGE_TAG="${VERSION}"
-
 ENV NODE_ENV=production
 ENV PORT=8080
 ENV HOSTNAME=0.0.0.0
 
 LABEL \
-    org.opencontainers.image.authors="https://github.com/barnes-c" \
-    org.opencontainers.image.base.name="node:22-alpine" \
-    org.opencontainers.image.base.digest="${NODE_IMAGE_DIGEST}" \
+    org.opencontainers.image.authors="https://${IMAGE_URL_BASE}" \
     org.opencontainers.image.created="${BUILD_TIMESTAMP}" \
     org.opencontainers.image.description="Website for https://barnes.biz" \
     org.opencontainers.image.documentation="https://barnes.biz" \
     org.opencontainers.image.licenses="GPL-3.0-only" \
-    org.opencontainers.image.ref.name="${IMAGE_NAME}" \
+    org.opencontainers.image.ref.name="${VERSION}" \
     org.opencontainers.image.revision="${COMMIT_HASH}" \
     org.opencontainers.image.source="https://${IMAGE_URL_BASE}/${IMAGE_NAME}.git" \
-    org.opencontainers.image.title="website" \
+    org.opencontainers.image.title="${IMAGE_NAME}" \
     org.opencontainers.image.url="https://${IMAGE_URL_BASE}/${IMAGE_NAME}" \
     org.opencontainers.image.vendor="Barnes-C" \
     org.opencontainers.image.version="${VERSION}"

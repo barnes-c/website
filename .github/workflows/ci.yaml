@@ -94,16 +94,20 @@ jobs:
             COMMIT_HASH=${{ steps.vars.outputs.short_sha }}
             VERSION=pr-${{ github.event.number }}
             IMAGE_NAME=${{ env.APP_NAME }}
-            IMAGE_URL_BASE=github.com/${{ github.repository }}
+            IMAGE_URL_BASE=github.com/${{ github.repository_owner }}
           annotations: |
-            index:org.opencontainers.image.title=${{ env.APP_NAME }}
+            index:org.opencontainers.image.authors=https://github.com/${{ github.repository_owner }}
+            index:org.opencontainers.image.created=${{ github.event.pull_request.updated_at }}
             index:org.opencontainers.image.description=Website for https://barnes.biz
-            index:org.opencontainers.image.source=https://github.com/${{ github.repository }}.git
-            index:org.opencontainers.image.url=https://github.com/${{ github.repository }}
-            index:org.opencontainers.image.revision=${{ github.sha }}
-            index:org.opencontainers.image.version=pr-${{ github.event.number }}
+            index:org.opencontainers.image.documentation=https://barnes.biz
             index:org.opencontainers.image.licenses=GPL-3.0-only
+            index:org.opencontainers.image.ref.name=pr-${{ github.event.number }}
+            index:org.opencontainers.image.revision=${{ github.sha }}
+            index:org.opencontainers.image.source=https://github.com/${{ github.repository }}.git
+            index:org.opencontainers.image.title=${{ env.APP_NAME }}
+            index:org.opencontainers.image.url=https://github.com/${{ github.repository }}
             index:org.opencontainers.image.vendor=Barnes-C
+            index:org.opencontainers.image.version=pr-${{ github.event.number }}
 
   package_release:
     if: startsWith(github.ref, 'refs/tags/')
@@ -136,13 +140,17 @@ jobs:
             COMMIT_HASH=${{ github.sha }}
             VERSION=${{ github.ref_name }}
             IMAGE_NAME=${{ env.APP_NAME }}
-            IMAGE_URL_BASE=github.com/${{ github.repository }}
+            IMAGE_URL_BASE=github.com/${{ github.repository_owner }}
           annotations: |
-            index:org.opencontainers.image.title=${{ env.APP_NAME }}
+            index:org.opencontainers.image.authors=https://github.com/${{ github.repository_owner }}
+            index:org.opencontainers.image.created=${{ github.event.repository.updated_at }}
             index:org.opencontainers.image.description=Website for https://barnes.biz
-            index:org.opencontainers.image.source=https://github.com/${{ github.repository }}.git
-            index:org.opencontainers.image.url=https://github.com/${{ github.repository }}
-            index:org.opencontainers.image.revision=${{ github.sha }}
-            index:org.opencontainers.image.version=${{ github.ref_name }}
+            index:org.opencontainers.image.documentation=https://barnes.biz
             index:org.opencontainers.image.licenses=GPL-3.0-only
+            index:org.opencontainers.image.ref.name=${{ github.ref_name }}
+            index:org.opencontainers.image.revision=${{ github.sha }}
+            index:org.opencontainers.image.source=https://github.com/${{ github.repository }}.git
+            index:org.opencontainers.image.title=${{ env.APP_NAME }}
+            index:org.opencontainers.image.url=https://github.com/${{ github.repository }}
             index:org.opencontainers.image.vendor=Barnes-C
+            index:org.opencontainers.image.version=${{ github.ref_name }}
