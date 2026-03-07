@@ -25,13 +25,24 @@ function checkRateLimit(ip: string): boolean {
 }
 
 export async function POST(req: Request) {
-    const ip =
-        req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown"
+    const xffEntries = req.headers.get("x-forwarded-for")?.split(",") ?? []
+    const ip = xffEntries[xffEntries.length - 1]?.trim() ?? "unknown"
     if (!checkRateLimit(ip)) {
         return NextResponse.json({ error: "Too many requests" }, { status: 429 })
     }
 
-    const { name, email, message } = await req.json()
+    let body: unknown
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
+    }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+        return NextResponse.json({ error: "Invalid fields" }, { status: 400 })
+    }
+
+    const { name, email, message } = body as Record<string, unknown>
 
     if (!name || !email || !message) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 })

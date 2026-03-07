@@ -28,8 +28,8 @@ function checkRateLimit(ip: string): boolean {
 }
 
 export async function middleware(request: NextRequest) {
-    const ip =
-        request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown"
+    const xffAll = request.headers.get("x-forwarded-for")?.split(",") ?? []
+    const ip = xffAll[xffAll.length - 1]?.trim() ?? "unknown"
 
     if (request.nextUrl.pathname.startsWith("/api/")) {
         if (!checkRateLimit(ip)) {
