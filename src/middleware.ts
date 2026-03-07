@@ -8,6 +8,13 @@ const apiRateLimit = new Map<string, { count: number; resetAt: number }>()
 const API_LIMIT = 20
 const API_WINDOW_MS = 60 * 1000
 
+setInterval(() => {
+    const now = Date.now()
+    for (const [ip, entry] of apiRateLimit) {
+        if (now > entry.resetAt) apiRateLimit.delete(ip)
+    }
+}, API_WINDOW_MS)
+
 function checkRateLimit(ip: string): boolean {
     const now = Date.now()
     const entry = apiRateLimit.get(ip)
@@ -21,8 +28,8 @@ function checkRateLimit(ip: string): boolean {
 }
 
 export async function middleware(request: NextRequest) {
-    const ip =
-        request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown"
+    const xffAll = request.headers.get("x-forwarded-for")?.split(",") ?? []
+    const ip = xffAll[xffAll.length - 1]?.trim() ?? "unknown"
 
     if (request.nextUrl.pathname.startsWith("/api/")) {
         if (!checkRateLimit(ip)) {
@@ -47,9 +54,9 @@ export async function middleware(request: NextRequest) {
     })
 
     if (res.status !== 200) {
-        const rd = encodeURIComponent(request.url)
+        const rd = encodeURIComponent(originalUrl)
         return NextResponse.redirect(
-            new URL(`/outpost.goauthentik.io/start?rd=${rd}`, request.url),
+            new URL(`/outpost.goauthentik.io/start?rd=${rd}`, originalUrl),
         )
     }
 
