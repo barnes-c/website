@@ -1,6 +1,4 @@
-.env
-.env.*
-.env.local
+.env*
 .git
 .gitignore
 .idea
