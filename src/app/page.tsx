@@ -1,6 +1,11 @@
 "use client"
 
-import { BackgroundShader } from "@/components/background-shader"
+import dynamic from "next/dynamic"
+
+const BackgroundShader = dynamic(
+  () => import("@/components/background-shader").then((m) => m.BackgroundShader),
+  { ssr: false }
+)
 import { CustomCursor } from "@/components/custom-cursor"
 import { GrainOverlay } from "@/components/grain-overlay"
 import SectionsScroller, { type SectionsScrollerHandle } from "@/components/sections-scroller"
