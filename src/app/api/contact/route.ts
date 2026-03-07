@@ -5,6 +5,13 @@ const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const LIMIT = 3
 const WINDOW_MS = 60 * 60 * 1000
 
+setInterval(() => {
+    const now = Date.now()
+    for (const [ip, entry] of rateLimit) {
+        if (now > entry.resetAt) rateLimit.delete(ip)
+    }
+}, WINDOW_MS)
+
 function checkRateLimit(ip: string): boolean {
     const now = Date.now()
     const entry = rateLimit.get(ip)
@@ -46,6 +53,9 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Invalid email" }, { status: 400 })
     }
 
+    const safeName = name.replace(/[\r\n]/g, " ")
+    const safeEmail = email.replace(/[\r\n]/g, "")
+
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT ?? 587),
@@ -56,13 +66,17 @@ export async function POST(req: Request) {
         },
     })
 
-    await transporter.sendMail({
-        from: process.env.SMTP_FROM ?? `"Website Contact" <${process.env.SMTP_USER}>`,
-        to: "website@barnes.biz",
-        replyTo: email,
-        subject: `Contact form: ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    })
+    try {
+        await transporter.sendMail({
+            from: process.env.SMTP_FROM ?? `"Website Contact" <${process.env.SMTP_USER}>`,
+            to: "website@barnes.biz",
+            replyTo: safeEmail,
+            subject: `Contact form: ${safeName}`,
+            text: `Name: ${safeName}\nEmail: ${safeEmail}\n\n${message}`,
+        })
+    } catch {
+        return NextResponse.json({ error: "Failed to send message" }, { status: 500 })
+    }
 
     return NextResponse.json({ ok: true })
 }
