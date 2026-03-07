@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/barnes-c/website)](./LICENSE)
 
 This repository contains the code for my personal website, [barnes.biz](https://barnes.biz).
-It serves as an online CV and a technical sandbox for experimenting with modern frontend development, CI/CD automation, and GitOps workflows.
+It serves as an online CV and an sandbox for playing with modern frontend development, CI/CD automation, and GitOps workflows.
 
 ## Tech Stack
 
@@ -18,3 +18,7 @@ It serves as an online CV and a technical sandbox for experimenting with modern 
 ## Purpose
 
 This website functions as both a professional profile and a personal testbed for applying best practices in web performance, containerized deployments, and infrastructure automation.
+
+## License
+
+- This repository is licensed under the [GPL-3.0](https://github.com/barnes-c/website/blob/master/LICENSE).
