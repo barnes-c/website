@@ -8,14 +8,18 @@ COPY . .
 ENV NODE_ENV=production
 RUN bun run build
 
-FROM nginx:1.29-alpine@sha256:1d13701a5f9f3fb01aaa88cef2344d65b6b5bf6b7d9fa4cf0dca557a8d7702ba
+FROM node:25-alpine
+
+RUN apk upgrade --no-cache
 
 ARG BUILD_TIMESTAMP="n/a"
 ARG COMMIT_HASH="n/a"
 ARG IMAGE_NAME="website"
 ARG IMAGE_URL_BASE="github.com/barnes-c"
 ARG VERSION="dev"
+ENV HOSTNAME=0.0.0.0
 ENV NODE_ENV=production
+ENV PORT=8080
 
 LABEL \
     org.opencontainers.image.authors="https://${IMAGE_URL_BASE}" \
@@ -31,12 +35,15 @@ LABEL \
     org.opencontainers.image.vendor="Barnes-C" \
     org.opencontainers.image.version="${VERSION}"
 
-COPY ./.docker/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/out /usr/share/nginx/html
+WORKDIR /app
+
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
 
 RUN adduser -D -H -u 1001 -s /sbin/nologin appuser \
-    && mkdir -p /var/cache/nginx /var/run \
-    && chown -R 1001:1001 /usr/share/nginx/html /var/cache/nginx /var/run /etc/nginx
+    && chown -R 1001:1001 /app
 
 USER 1001
 EXPOSE 8080
+
+CMD ["node", "server.js"]
