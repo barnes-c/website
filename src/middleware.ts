@@ -31,11 +31,17 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next()
     }
 
+    // build own url instead of taking it from raw request.url string which can be influenced by the client
+    const originalUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}${request.nextUrl.pathname}${request.nextUrl.search}`
+
+    const xffEntries = request.headers.get("x-forwarded-for")?.split(",") ?? []
+    const trustedIp = xffEntries[xffEntries.length - 1]?.trim() ?? ""
+
     const res = await fetch(`${AUTHENTIK_URL}/outpost.goauthentik.io/auth/nginx`, {
         headers: {
-            "X-Original-URL": request.url,
-            "X-Forwarded-For": request.headers.get("x-forwarded-for") ?? "",
-            "X-Forwarded-Host": request.headers.get("host") ?? "",
+            "X-Original-URL": originalUrl,
+            "X-Forwarded-For": trustedIp,
+            "X-Forwarded-Host": request.nextUrl.host,
             "X-Forwarded-Proto": "https",
         },
     })
