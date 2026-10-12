@@ -64,6 +64,12 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Invalid email" }, { status: 400 })
     }
 
+    const to = process.env.CONTACT_TO
+    if (!to) {
+        console.error("CONTACT_TO is not set")
+        return NextResponse.json({ error: "Failed to send message" }, { status: 500 })
+    }
+
     const safeName = name.replace(/[\r\n]/g, " ")
     const safeEmail = email.replace(/[\r\n]/g, "")
 
@@ -80,7 +86,7 @@ export async function POST(req: Request) {
     try {
         await transporter.sendMail({
             from: process.env.SMTP_FROM ?? `"Website Contact" <${process.env.SMTP_USER}>`,
-            to: "website@barnes.biz",
+            to,
             replyTo: safeEmail,
             subject: `Contact form: ${safeName}`,
             text: `Name: ${safeName}\nEmail: ${safeEmail}\n\n${message}`,
