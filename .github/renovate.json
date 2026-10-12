@@ -38,6 +38,23 @@
                 "dockerfile"
             ],
             "groupName": "docker base images"
+        },
+        {
+            "description": "Types must match the Node runtime in the Dockerfile (node:24-alpine).",
+            "matchPackageNames": [
+                "@types/node"
+            ],
+            "allowedVersions": "<25"
+        },
+        {
+            "description": "TypeScript majors need typescript-eslint and Next.js support first; open only on request.",
+            "matchPackageNames": [
+                "typescript"
+            ],
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "dependencyDashboardApproval": true
         }
     ]
 }
