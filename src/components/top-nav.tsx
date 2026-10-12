@@ -1,7 +1,5 @@
 "use client"
 
-import { MagneticButton } from "@/components/magnetic-button"
-
 type Props = {
     currentSection: number
     onNavigate: (index: number) => void
@@ -45,10 +43,6 @@ export function TopNav({
                     </button>
                 ))}
             </div>
-
-            <MagneticButton variant="secondary" onClick={() => { window.location.href = '/dashboard'; }}>
-                Login
-            </MagneticButton>
         </nav>
     )
 }

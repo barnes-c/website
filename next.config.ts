@@ -28,15 +28,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }]
   },
-  async rewrites() {
-    return [
-      {
-        source: "/outpost.goauthentik.io/:path*",
-        destination:
-          "http://authentik-server.authentik.svc.cluster.local/outpost.goauthentik.io/:path*",
-      },
-    ]
-  },
 };
 
 export default nextConfig;
